@@ -196,7 +196,7 @@
 
 
 ```
-var Factory2 = function (type, content) {
+	var Factory2 = function (type, content) {
       if (!(this instanceof Factory2)) {
         return new Factory2(type, content)
       } else {
