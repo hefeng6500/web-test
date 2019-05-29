@@ -77,8 +77,6 @@ export default {
         "generateRoutes",
         this.data
       );
-      console.log(router);
-      console.log(accessRoutes);
       router.addRoutes(accessRoutes);
       this.data = this.$store.state.routes
     }
