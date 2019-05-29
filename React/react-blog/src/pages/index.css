@@ -1,0 +1,19 @@
+.header {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background-color: #fff;
+}
+
+.logo {
+    width: 120px;
+    height: 100%;
+    line-height: 50px;
+    font-weight: bold;
+    background: rgba(255, 255, 255, .2);
+    float: left;
+}
+
+.has-team-news {
+    top: -7px;
+}
