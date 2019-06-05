@@ -7,7 +7,7 @@
         text-color="#fff"
         active-text-color="#ffd04b"
       >
-        <sidebar-item v-for="route in routes" :key="route.index" :item="route"  ></sidebar-item>
+        <sidebar-item v-for="route in routes" :key="route.name" :item="route"  ></sidebar-item>
       </el-menu>
     </el-scrollbar>
   </el-row>
@@ -48,4 +48,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.el-menu-vertical-demo{
+  height: 100vh;
+}
 </style>

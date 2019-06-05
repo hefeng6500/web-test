@@ -4,7 +4,7 @@
       <el-col :span="4">
         <sidebar :routes="data" :defaultProps="defaultProps"/>
       </el-col>
-      <el-col :span="20">
+      <el-col :span="20" class="app-container">
         <router-view/>
       </el-col>
     </el-row>
@@ -83,5 +83,8 @@ export default {
   }
 };
 </script>
-<style lang='scss'>
+<style lang='scss' scoped>
+.app-container{
+  padding: 20px;
+}
 </style>

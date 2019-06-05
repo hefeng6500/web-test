@@ -4,14 +4,14 @@
     <template v-if="!item.children">
       <div>
         <a v-if="item.href" target="_blank" :href="item.href">
-          <el-menu-item :index="item.index">{{ item[defaultProps.label] }} </el-menu-item>
+          <el-menu-item :index="item.name">{{ item[defaultProps.label] }} </el-menu-item>
         </a>
         
         <template v-else>
           <router-link v-if="item.path" :to="item.path">
-            <el-menu-item :index="item.index">{{ item[defaultProps.label] }}  </el-menu-item>
+            <el-menu-item :index="item.name">{{ item[defaultProps.label] }}  </el-menu-item>
           </router-link>
-          <el-menu-item v-else :index="item.index">{{ item[defaultProps.label] }}</el-menu-item>
+          <el-menu-item v-else :index="item.name">{{ item[defaultProps.label] }}</el-menu-item>
         </template>
       </div>
     </template>
@@ -19,7 +19,7 @@
     <!-- 有子节点 -->
     <template v-else>
       <div>
-        <el-submenu :index="item.index">
+        <el-submenu :index="item.name">
           <template slot="title">
             <span>{{ item[defaultProps.label] }} </span>
           </template>
@@ -27,7 +27,7 @@
         </el-submenu>
       </div>
     </template>
-    <!-- <el-submenu v-for="item in routes" :key="item.index" :index="item.index">
+    <!-- <el-submenu v-for="item in routes" :key="item.name" :index="item.name">
       <template slot="title">
         <div>{{ item.label }} + {{ item.children }}</div>
       </template>

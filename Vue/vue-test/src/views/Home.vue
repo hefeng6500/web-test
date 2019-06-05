@@ -7,12 +7,14 @@
       @handleClickDay="handleClickDay"
       @handlePrevMonth="handlePrevMonth"
       @handleNextMonth="handleNextMonth"
-    /> -->
+    />-->
+    <el-button type="primary" @click="selectTree">selectTree</el-button>
   </div>
 </template>
 
 <script>
 import datePicker from "./components/date-picker";
+
 export default {
   name: "date-picker",
   data() {
@@ -36,10 +38,13 @@ export default {
   },
   methods: {
     handleClickDay() {
-      console.log('handleClickDay')
+      console.log("handleClickDay");
     },
     handlePrevMonth() {},
-    handleNextMonth() {}
+    handleNextMonth() {},
+    selectTree() {
+      this.$router.push("/selectTree");
+    }
   }
 };
 </script>
