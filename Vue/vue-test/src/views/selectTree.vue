@@ -1,5 +1,9 @@
 <template>
   <div>
+    <el-button type="primary">
+      <a href="https://vue-treeselect.js.org/" target="_blank">treeselect</a>
+    </el-button>
+    id: {{ value }}
     <el-row>
       <el-col :span="8">
         <treeselect
@@ -11,6 +15,7 @@
         />
       </el-col>
     </el-row>
+    
   </div>
 </template>
 
