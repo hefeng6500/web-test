@@ -15,6 +15,12 @@ export const constantRoutes = [
     name: 'selectTree',
     title: "selectTree",
     component: () => import('../views/selectTree')
+  },
+  {
+    path: '/disableDate',
+    name: 'disableDate',
+    title: "disableDate",
+    component: () => import('../views/disableDate')
   }
 ]
 

@@ -9,6 +9,7 @@
       @handleNextMonth="handleNextMonth"
     />-->
     <el-button type="primary" @click="selectTree">selectTree</el-button>
+    <el-button type="primary" @click="disableDate">Element UI disableDate</el-button>
   </div>
 </template>
 
@@ -44,6 +45,9 @@ export default {
     handleNextMonth() {},
     selectTree() {
       this.$router.push("/selectTree");
+    },
+    disableDate(){
+      this.$router.push("/disableDate");
     }
   }
 };
