@@ -3,7 +3,7 @@ import ReactDOM from "react-dom"
 import { Input, Button, message } from 'antd';
 import { withRouter } from "react-router-dom";
 import md5 from 'md5'
-import "../css/login.css"
+// import "../css/login.css"
 
 import { mountNode } from '../utils/someutils.js'
 import * as server from '../api/login'
