@@ -52,3 +52,25 @@
     line-height: 20px;
     margin-top: 10px
   }
+  .article-title{
+    margin-bottom: 10px;
+  }
+  .post-meta{
+    font-style: italic;
+  }
+  .meta-span{
+    margin-right: 10px;
+  }
+  .icon{
+    margin-right: 2px;
+  }
+  .article-desc{
+    margin: 14px 0;
+    font-size: 16px;
+  }
+  .tags{
+    margin-top: 10px;
+  }
+  .hot-tag .ant-tag{
+    margin: 0 10px 10px 0;
+  }

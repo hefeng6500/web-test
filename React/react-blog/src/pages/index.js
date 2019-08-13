@@ -17,13 +17,24 @@ import {
   Dropdown,
   message,
   Divider,
-  Card
-
+  Card,
+  Tag,
+  List,
+  Tabs
 } from "antd";
 
 import "./index.css";
 
 class Index extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      panes: [
+        { title: '我的专栏', content: 'Content of Tab Pane 1', key: '1' },
+        { title: '行业快讯', content: 'Content of Tab Pane 2', key: '2' },
+      ]
+    }
+  }
   test() {
     server.test().then(res => { });
   }
@@ -39,6 +50,7 @@ class Index extends Component {
     const { Header, Content, Footer } = Layout;
     const Search = Input.Search;
     const { SubMenu } = Menu;
+    const { TabPane } = Tabs;
 
     const menu = (
       <Menu onClick={this.handleMenuClick}>
@@ -56,6 +68,14 @@ class Index extends Component {
         </Menu.Item>
       </Menu>
     );
+
+    const data = [
+      'Racing car sprays burning fuel into crowd.',
+      'Japanese princess to wed commoner.',
+      'Australian walks 100km after outback crash.',
+      'Man charged over missing wedding girl.',
+      'Los Angeles battles huge wildfires.',
+    ];
 
     return (
       <div>
@@ -167,17 +187,87 @@ class Index extends Component {
                   </div>
                 </div>
                 <Divider type="horizontal" style={{ margin: "10px 0" }} />
-                <Card style={{ width: 300 }}>
-                  <p>Card content</p>
-                  <p>Card content</p>
-                  <p>Card content</p>
+                <List
+                  pagination={{
+                    onChange: page => {
+                      console.log(page);
+                    },
+                    pageSize: 3,
+                    position: 'bottom'
+                  }}
+                  dataSource={data}
+                  renderItem={item => (
+                    <List.Item>
+                      <Card style={{ width: "100%" }}>
+                        <h2 className="article-title">这是文章标题</h2>
+                        <div className="post-meta">
+                          <span className="meta-span">
+                            <Icon type="user" className="icon" />
+                            @nickname
+                        </span>
+                          <span className="meta-span">
+                            <Icon type="clock-circle" className="icon" />
+                            10分钟前
+                        </span>
+                        </div>
+                        <div className="article-desc">
+                          这里是文章描述
+                      </div>
+                        <div className="tags">
+                          <Tag>Tag 1</Tag>
+                          <Tag>Tag 1</Tag>
+                          <Tag>Tag 1</Tag>
+                        </div>
+                      </Card>
+                    </List.Item>
+                  )}
+                />
+
+              </Col>
+              <Col span={6}>
+                <Card style={{ width: '100%', borderColor: '#42b983', }}>
+                  <h3 style={{ color: '#42b983' }}>
+                    <Icon type="notification" style={{ marginRight: '8px' }} />
+                    <span>这里是一个公告标题</span>
+                  </h3>
+                  <p style={{ margin: '10px 0' }}>这里有一个描述性词汇描述性词汇描述性词汇描述性词汇描述性词汇</p>
+                  <Button type="primary" style={{ width: '100%', background: '#42b983', borderColor: '#42b983', color: '#fff' }}>
+                    开始浏览
+                  </Button>
+                </Card>
+
+                <Card style={{ width: '100%', margin: '10px 0' }}>
+                  <Icon type="tag" style={{ marginRight: '8px', fontSize: '16px' }} />
+                  <span>热门标签</span>
+                  <Divider type="horizontal" />
+                  <Row className="hot-tag">
+                    <Tag>前端</Tag>
+                    <Tag>数据结构</Tag>
+                    <Tag>WEB全栈</Tag>
+                    <Tag>事件循环</Tag>
+                    <Tag>浏览器</Tag>
+                    <Tag>Node.js</Tag>
+                    <Tag>负载均衡</Tag>
+                    <Tag>微服务</Tag>
+                    <Tag>计算机组成原理</Tag>
+                    <Tag>蚂蚁金服前端</Tag>
+                  </Row>
+                </Card>
+
+                <Card style={{ width: '100%', margin: '10px 0' }}>
+                  <Tabs>
+                    {this.state.panes.map(pane => (
+                      <TabPane tab={pane.title} key={pane.key}>
+                        {pane.content}
+                      </TabPane>
+                    ))}
+                  </Tabs>
                 </Card>
               </Col>
-              <Col span={6}>col-12</Col>
             </Row>
           </Content>
           <Footer style={{ textAlign: "center" }}>
-            Ant Design© 2018 Created by Ant UED
+            HeFeng Blog© 2019 Created by Doctor Yang
           </Footer>
         </Layout>
       </div>
