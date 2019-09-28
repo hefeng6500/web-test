@@ -1,15 +1,15 @@
 <template>
   <div class="app">
-    <Layout />
+    <hello-world></hello-world>
   </div>
 </template>
 
 <script>
-import Layout from '@/components/Layout'
+import HelloWorld from '@/components/HelloWorld'
   export default {
     name: 'app',
     components: {
-      Layout
+      HelloWorld
     }
   }
 </script>
