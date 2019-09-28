@@ -15,7 +15,7 @@
       :contextMenu="contextMenu"
       :filters="filters"
       :dropdownMenu="dropdownMenu"
-      :hiddenRows="hiddenRows"
+      :licenseKey="licenseKey"
     ></hot-table>
   </div>
 </template>
@@ -338,9 +338,7 @@ export default {
       contextMenu: true,
       filters: true,
       dropdownMenu: true,
-      hiddenRows: {
-      },
-      licenseKey: "4d522-5237a-55f42-6653a-d1494"
+      licenseKey: "e7206-5467d-4516f-4951f-abc6c"
     };
   },
   components: {
