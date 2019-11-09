@@ -1,5 +1,14 @@
-function greeter(person) {
-    return "Hello, " + person.firstName + " " + person.lastName;
-}
-var user = { firstName: "Jane", lastName: "User" };
-document.body.innerHTML = greeter(user);
+// interface Person {
+//   name: string;
+//   age?: number;
+//   [propName: string]: string;
+// }
+// let tom: Person = {
+//   name: 'Tom',
+//   age: 25,  
+//   gender: 'male'
+// };
+var decLiteral = 6;
+var hexLiteral = 0xf00d;
+var binaryLiteral = 10;
+var octalLiteral = 484;

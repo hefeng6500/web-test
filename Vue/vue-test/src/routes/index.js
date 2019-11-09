@@ -9,6 +9,12 @@ export const constantRoutes = [
     name: 'home',
     title: "首页",
     component: ()=> import('../components/HelloWorld.vue')
+  },
+  {
+    path: '/diff',
+    name: 'diff',
+    title: "差异",
+    component: ()=> import('../components/diff.vue')
   }
 ]
 
