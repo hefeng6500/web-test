@@ -11,32 +11,13 @@
 <body>
 
   <div id="app"></div>
-
+  <script src="./mvvm.js"></script>
   <script>
-    // var app = new Vue()
-    var obj = {
-    }
-    let val = null
-    
-
-    Object.defineProperty(obj, 'test', {
-      configurable: true, // 可配置性
-      enumerable: true, // 属性可枚举
-      get() {
-        console.log('get')
-        return val
-      },
-      set(newVal) {
-        console.log('set')
-        val = newVal
+    var app = new Vue({
+      data: {
+        a: 1
       }
     })
-    for(let key in obj){
-      console.log(key, obj[key])
-    }
-    
-    obj.test = 'Mis.Yang'
-    console.log(obj) // {test: 'Mis.Yang'}
   </script>
 </body>
 
