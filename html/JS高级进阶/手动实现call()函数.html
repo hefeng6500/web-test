@@ -17,6 +17,7 @@
       from: 'America',
       getName: function (prefix) {
         console.log(prefix + this.name)
+        // return (prefix + this.name)
       }
     }
 
@@ -34,8 +35,9 @@
     Function.prototype._call = function (context) {
       var args = [].slice.apply(arguments, [1])
       context.fn = this
-      context.fn(...args)
+      var result = context.fn(...args)
       delete context.fn
+      return result
     }
 
     // 不使用call函数的实现
@@ -45,8 +47,9 @@
         args.push('arguments[' + i + ']')
       }
       context.fn = this
-      eval('context.fn(' + args + ')')
+      var result = eval('context.fn(' + args + ')')
       delete context.fn
+      return result
     }
 
     obj.getName._newCall(obj2, 'hello, everyone, i am ') // hello, everyone, i am Evan You
@@ -54,13 +57,12 @@
     // ECMAScript6 的实现
     Function.prototype._es6Call = function (context, ...args) {
       context.fn = this
-      context.fn(...args)
+      let result = context.fn(...args)
       delete context.fn
+      return result
     }
 
     obj.getName._es6Call(obj2, 'hello, everyone, i am ') // hello, everyone, i am Evan You
-
-
   </script>
 </body>
 
