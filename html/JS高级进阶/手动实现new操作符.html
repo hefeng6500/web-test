@@ -21,8 +21,8 @@
     }
 
     var dog = new Animal('bob', 5)
-    dog.sayName()
-    console.log(dog instanceof Animal) // Hello Everyone, I am bob 
+    dog.sayName() // Hello Everyone, I am bob 
+    console.log(dog instanceof Animal) // true
 
     // object instanceof constructor; instanceof 运算符用来检测 constructor.prototype 是否存在于参数 object 的原型链
 
@@ -42,8 +42,20 @@
     }
 
     var cat = _new(Animal, 'alice', 3)
-    cat.sayName()
-    console.log(cat instanceof Animal) // Hello Everyone, I am alice
+    cat.sayName() // Hello Everyone, I am alice
+    console.log(cat instanceof Animal) // true
+
+    // ECMAScript6的实现
+    function _es6new(fn, ...args) {
+      let obj = Object.create(fn.prototype)
+      let result = fn.call(obj, ...args)
+      return result instanceof Object ? result : obj
+    }
+
+    var rabbit = _es6new(Animal, 'pace', 4)
+    rabbit.sayName() // Hello Everyone, I am pace
+    console.log(rabbit instanceof Animal) // true
+
   </script>
 </body>
 
