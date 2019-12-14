@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>js高级进阶——手动实现深拷贝函数</title>
+</head>
+
+<body>
+  <script>
+    function deepClone(data, hash = new WeakMap) {
+      if (data == undefined) return data;
+      if (typeof data !== 'object') return data;
+      if (data instanceof RegExp) return new RegExp(data)
+      if (data instanceof Date) return new Date(data)
+
+      var v = hash.get(data)
+      if (v) return v
+
+      var instance = new data.constructor
+      hash.set(data, instance)
+      for (var key in data) {
+        if (data.hasOwnProperty(key)) {
+          instance[key] = deepClone(data[key], hash)
+        }
+      }
+      return instance
+    }
+
+    var a = {
+      name: 'bob',
+      desc: {
+        age: 12
+      }
+    }
+
+    var b = deepClone(a)
+    b.desc.age = 100
+    console.log(b)
+    console.log(a)
+
+    // js循环引用
+    var t = {}
+    t.t = t
+    console.log(deepClone(t))
+
+
+  </script>
+</body>
+
+</html>
