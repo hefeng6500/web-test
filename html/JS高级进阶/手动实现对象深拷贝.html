@@ -10,6 +10,7 @@
 
 <body>
   <script>
+    // 考点：数据类型校验， 循环引用
     function deepClone(data, hash = new WeakMap) {
       if (data == undefined) return data;
       if (typeof data !== 'object') return data;
