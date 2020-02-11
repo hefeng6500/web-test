@@ -3,19 +3,24 @@ function Vue (options) {
   var data = (this._data = options.data);
   observe (data);
 
-  for (var key in data) {
-    Object.defineProperty (this, key, {
-      get () {
-        return this._data[key];
-      },
-      set (newVal) {
-        this._data[key] = newVal;
-      },
-    });
+  for (var key in this._data) {
+    (function (key) {
+      Object.defineProperty (this, key, {
+        get () {
+          return this._data[key];
+        },
+        set (newVal) {
+          this._data[key] = newVal;
+        },
+      })
+    }).call(this, key)
   }
 }
 
 function observe (data) {
+  if(typeof data ==='object'){
+    observe(data)
+  }
   return new Observe (data);
 }
 

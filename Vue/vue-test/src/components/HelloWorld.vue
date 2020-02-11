@@ -1,7 +1,8 @@
 <template>
   <div>
-    <button @click="btnClick">btn</button>
-    <span v-for="(item, index) in testData" :key="index">{{item}}</span>
+    <div v-for="(item,index) in datas" :key="index">
+      <slot name="header" :index="index"></slot>
+    </div>
   </div>
 </template>
 
@@ -9,16 +10,13 @@
 export default {
   data() {
     return {
-      testData: [1, 2, 3]
+      datas: [
+        {index: 0, name: 'name0'},
+        {index: 1, name: 'name1'}
+      ]
     };
   },
-  methods: {
-    btnClick() {
-      let data = { ...this.testData };
-      data[0] = 9;
-      this.testData = data;
-    }
-  }
+  methods: {}
 };
 </script>
 
