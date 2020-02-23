@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>函数反柯里化</title>
+</head>
+
+<body>
+  <script>
+
+    /*
+
+    反柯里化的思想与柯里化正好相反，如果说柯里化的过程是将函数拆分成功能更具体化的函数，那反柯里化的作用则在于扩大函数的适用性，使本来作为特定对象所拥有的功能函数可以被任意对象所使用。
+
+    反柯里化通用式的参数为一个希望可以被其他对象调用的方法或函数，通过调用通用式返回一个函数，这个函数的第一个参数为要执行方法的对象，后面的参数为执行这个方法时需要传递的参数。
+    
+    */
+
+    // 构造函数 F
+    function F() { }
+
+    // 拼接属性值的方法
+    F.prototype.concatProps = function () {
+      let args = Array.from(arguments);
+      return args.reduce((prev, next) => `${this[prev]}&${this[next]}`);
+    }
+
+    // 使用 concatProps 的对象
+    let obj = {
+      name: "Panda",
+      age: 16
+    };
+
+    function uncurring(fn) {
+      return function () {
+        var obj = Array.prototype.shift.call(arguments)
+        return fn.apply(obj, arguments)
+      }
+    }
+
+    // 使用反柯里化进行转化
+    let concatProps = uncurring(F.prototype.concatProps);
+    console.log(concatProps(obj, "name", "age")) // Panda&16
+
+
+  </script>
+</body>
+
+</html>
