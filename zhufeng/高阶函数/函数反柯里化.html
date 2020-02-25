@@ -18,21 +18,9 @@
     
     */
 
-    // 构造函数 F
-    function F() { }
 
-    // 拼接属性值的方法
-    F.prototype.concatProps = function () {
-      let args = Array.from(arguments);
-      return args.reduce((prev, next) => `${this[prev]}&${this[next]}`);
-    }
 
-    // 使用 concatProps 的对象
-    let obj = {
-      name: "Panda",
-      age: 16
-    };
-
+    // 定义柯里化函数
     function uncurring(fn) {
       return function () {
         var obj = Array.prototype.shift.call(arguments)
@@ -40,9 +28,58 @@
       }
     }
 
+    // 直接将反柯里化函数定义在函数的原型上
+    Function.prototype.unCurrying = function () {
+      const self = this
+      return function () {
+        return Function.prototype.call.apply(self, arguments)
+      }
+    }
+
+    /*
+      上述两种写法有些差别： 一个是独立反柯里化函数，一个是定义在函数原型上的反柯里化函数
+      前者使用的 shift() 可以将作用域移出来，
+      后者借用apply把要借用的函数作为this环境赋给call，并传入之后的形参作为参数执行
+      前者 shift() 移除的第一项恰好与后者 call() 第一个参数的值相同，简直异曲同工之妙
+      
+
+    */
+
+    // 除了上面两种玩法还可以这样，牛逼闪闪
+    Function.prototype.unCurrying = function () {
+      return this.call.bind(this)
+    }
+
+    // 示例一：
+    // 构造函数 F
+    function F() { }
+    // 拼接属性值的方法
+    F.prototype.concatProps = function () {
+      let args = Array.from(arguments);
+      return args.reduce((prev, next) => `${this[prev]}&${this[next]}`);
+    }
+    // 使用 concatProps 的对象
+    let obj = {
+      name: "Panda",
+      age: 16
+    };
     // 使用反柯里化进行转化
-    let concatProps = uncurring(F.prototype.concatProps);
-    console.log(concatProps(obj, "name", "age")) // Panda&16
+    let concatProps = F.prototype.concatProps.unCurrying();
+    console.log(concatProps(obj, "name", "age")) // 'Panda&16'
+
+    // 示例二：将 Object.prototype.toString 扩展到 window 上直接使用
+    let toString = Object.prototype.toString.unCurrying()
+    console.log(toString(1)) // '[object Number]'
+
+
+
+
+
+
+
+
+
+
 
 
   </script>
