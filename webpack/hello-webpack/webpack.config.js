@@ -5,10 +5,23 @@ const path = require('path')
 module.exports = {
   mode: 'production',
 
-  entry: './src/index.js', // webpack 0配置（默认配置）
-  // output: './dist/main.js', // webpack 0配置（默认配置）
+  entry: {
+    app: './src/index.js',
+    search: './src/search.js'
+  },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
+
+
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
+      }
+    ]
+  }
 }
