@@ -22,14 +22,14 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use:[
+        use: [
           'style-loader',
           'css-loader'
         ]
       },
       {
         test: /\.less$/,
-        use:[
+        use: [
           'style-loader',
           'css-loader',
           'less-loader'
@@ -37,7 +37,13 @@ module.exports = {
       },
       {
         test: /\.(jpg|jpeg|png|gif|svg)$/,
-        use:[
+        use: [
+          'file-loader',
+        ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
           'file-loader',
         ]
       }
