@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import './search.less'
+import logo from './images/logo.svg'
 
 class Search extends Component {
   constructor(props) {
@@ -11,12 +12,14 @@ class Search extends Component {
   }
   render() {
     return (
-      <div className="search-text">Search Text</div>
+      <div className="search-text">
+        Search Text
+      <img src={logo} /></div>
     );
   }
 }
 
 ReactDOM.render(
-  <Search/>,
+  <Search />,
   document.getElementById('root')
 )
