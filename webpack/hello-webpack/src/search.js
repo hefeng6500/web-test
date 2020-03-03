@@ -13,7 +13,7 @@ class Search extends Component {
   render() {
     return (
       <div className="search-text">
-        Search Text
+        Search Text1
       <img src={logo} /></div>
     );
   }

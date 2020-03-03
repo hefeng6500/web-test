@@ -13,6 +13,12 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js'
   },
+  watch: true,
+  watchOptions: {
+    ignored: /node_modules/,
+    aggregateTimeout: 300, // 延迟 300ms
+    poll: 1000 // 每秒询问 1000 次
+  },
   module: {
     rules: [
       {
