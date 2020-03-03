@@ -2,9 +2,10 @@
 
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: {
     app: './src/index.js',
     search: './src/search.js'
@@ -61,5 +62,10 @@ module.exports = {
     ]
   },
   plugins: [
-  ]
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  devServer: {
+    contentBase: './',
+    hot: true
+  }
 }
