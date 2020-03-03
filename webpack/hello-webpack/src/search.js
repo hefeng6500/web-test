@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import './search.css'
+import './search.less'
 
 class Search extends Component {
   constructor(props) {
