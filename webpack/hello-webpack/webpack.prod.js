@@ -9,8 +9,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = {
   mode: 'production',
   entry: {
-    app: './src/index.js',
-    search: './src/search.js'
+    app: './src/index/index.js',
+    search: './src/search/search.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -99,7 +99,7 @@ module.exports = {
       cssProcessor: require('cssnano')
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src/index.html'),
+      template: path.join(__dirname, 'src/index/index.html'),
       filename: 'index.html',
       chunks: ['index'],
       inject: true,
@@ -113,7 +113,7 @@ module.exports = {
       }
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src/search.html'),
+      template: path.join(__dirname, 'src/search/search.html'),
       filename: 'search.html',
       chunks: ['search'],
       inject: true,
