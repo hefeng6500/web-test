@@ -1,12 +1,11 @@
-'use strict';
 
-const path = require('path')
+const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const glob = require("glob")
-const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const glob = require('glob');
+const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 
 const setMPA = () => {
   const entry = {};
@@ -35,33 +34,36 @@ const setMPA = () => {
             preserveLineBreaks: false,
             minifyCSS: true,
             minifyJS: true,
-            removeComments: false
-          }
-        })
+            removeComments: false,
+          },
+        }),
       );
     });
 
   return {
     entry,
-    htmlWebpackPlugins
-  }
-}
+    htmlWebpackPlugins,
+  };
+};
 
 const { entry, htmlWebpackPlugins } = setMPA();
 
 module.exports = {
   mode: 'none',
-  entry: entry,
+  entry,
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: "js/[name]_[chunkhash:8].js"
+    filename: 'js/[name]_[chunkhash:8].js',
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: [
+          'babel-loader',
+          'eslint-loader',
+        ],
       },
       {
         test: /\.css$/,
@@ -72,8 +74,8 @@ module.exports = {
               esModule: true,
             },
           },
-          'css-loader'
-        ]
+          'css-loader',
+        ],
       },
       {
         test: /\.less$/,
@@ -91,19 +93,19 @@ module.exports = {
             options: {
               plugins: () => [
                 require('autoprefixer')({
-                  browsers: ['last 2 version', '>1%', 'ios 7']
-                })
-              ]
-            }
+                  browsers: ['last 2 version', '>1%', 'ios 7'],
+                }),
+              ],
+            },
           },
           {
             loader: 'px2rem-loader',
             options: {
               remUni: 75,
-              remPrecision: 8
-            }
-          }
-        ]
+              remPrecision: 8,
+            },
+          },
+        ],
       },
       {
         test: /\.(jpg|jpeg|png|gif|svg)$/,
@@ -112,10 +114,10 @@ module.exports = {
             loader: 'file-loader',
             options: {
               // limit: 10240,
-              name: 'img/[name]_[hash:8].[ext]'
-            }
-          }
-        ]
+              name: 'img/[name]_[hash:8].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -123,20 +125,20 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: '[name]_[hash:8].[ext]'
-            }
-          }
-        ]
-      }
-    ]
+              name: '[name]_[hash:8].[ext]',
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: `css/[name]_[contenthash:8].css`
+      filename: 'css/[name]_[contenthash:8].css',
     }),
     new OptimizeCSSAssetsPlugin({
       assetNameRegExp: /\.css$/g,
-      cssProcessor: require('cssnano')
+      cssProcessor: require('cssnano'),
     }),
     // new HtmlWebpackExternalsPlugin(
     //   {
@@ -154,7 +156,7 @@ module.exports = {
     //     ],
     //   }
     // ),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
   ].concat(htmlWebpackPlugins),
   optimization: {
     splitChunks: {
@@ -163,10 +165,10 @@ module.exports = {
         commons: {
           name: 'commons',
           chunks: 'all',
-          minChunks: 2
-        }
-      }
-    }
+          minChunks: 2,
+        },
+      },
+    },
   },
-  devtool: 'inline-source-map'
-}
+  devtool: 'inline-source-map',
+};
