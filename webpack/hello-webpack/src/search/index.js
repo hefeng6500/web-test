@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import './search.less'
 import logo from './images/logo.png'
+import '../../common'
 
 class Search extends Component {
   constructor(props) {
@@ -11,7 +12,6 @@ class Search extends Component {
     this.state = {};
   }
   render() {
-    debugger
     return (
       <div className="search-text">
         Search Text1
