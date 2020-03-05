@@ -49,7 +49,7 @@ const setMPA = () => {
 const { entry, htmlWebpackPlugins } = setMPA();
 
 module.exports = {
-  mode: 'production',
+  mode: 'none',
   entry: entry,
   output: {
     path: path.join(__dirname, 'dist'),
@@ -138,5 +138,6 @@ module.exports = {
       cssProcessor: require('cssnano')
     }),
     new CleanWebpackPlugin()
-  ].concat(htmlWebpackPlugins)
+  ].concat(htmlWebpackPlugins),
+  devtool: 'inline-source-map'
 }

@@ -11,6 +11,7 @@ class Search extends Component {
     this.state = {};
   }
   render() {
+    debugger
     return (
       <div className="search-text">
         Search Text1
