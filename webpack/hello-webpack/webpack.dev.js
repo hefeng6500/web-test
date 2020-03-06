@@ -1,11 +1,10 @@
-'use strict';
 
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const glob = require("glob")
+const glob = require('glob');
 
 const setMPA = () => {
   const entry = {};
@@ -43,13 +42,13 @@ const setMPA = () => {
   return {
     entry,
     htmlWebpackPlugins
-  }
-}
+  };
+};
 
 const { entry, htmlWebpackPlugins } = setMPA();
 
 module.exports = {
-  entry: entry,
+  entry,
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js'
@@ -59,13 +58,21 @@ module.exports = {
     rules: [
       {
         test: /.js$/,
-        use: 'babel-loader'
+        use: ['babel-loader', 'eslint-loader']
       },
       {
         test: /.css$/,
         use: [
           'style-loader',
-          'css-loader'
+          'css-loader',
+          'postcss-loader',
+          {
+            loader: 'px2rem-loader',
+            options: {
+              remUni: 75,
+              remPrecision: 8
+            }
+          }
         ]
       },
       {
@@ -73,7 +80,15 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          'less-loader'
+          'less-loader',
+          'postcss-loader',
+          {
+            loader: 'px2rem-loader',
+            options: {
+              remUni: 75,
+              remPrecision: 8
+            }
+          }
         ]
       },
       {
@@ -96,12 +111,12 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
-      filename: `css/[name]_[contenthash:8].css`
+      filename: 'css/[name]_[contenthash:8].css'
     }),
     new OptimizeCSSAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessor: require('cssnano')
-    }),
+    })
   ].concat(htmlWebpackPlugins),
   devServer: {
     contentBase: './dist',
