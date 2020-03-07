@@ -15,7 +15,6 @@ const setMPA = () => {
   Object.keys(entryFiles)
     .map((index) => {
       const entryFile = entryFiles[index];
-      // '/Users/cpselvis/my-project/src/index/index.js'
 
       const match = entryFile.match(/src\/(.*)\/index\.js/);
       const pageName = match && match[1];
@@ -26,7 +25,7 @@ const setMPA = () => {
           inlineSource: '.css$',
           template: path.join(__dirname, `src/${pageName}/index.html`),
           filename: `${pageName}.html`,
-          chunks: ['vendors', pageName],
+          chunks: [pageName],
           inject: true,
           minify: {
             html5: true,
@@ -131,35 +130,45 @@ module.exports = {
       assetNameRegExp: /\.css$/g,
       cssProcessor: require('cssnano')
     }),
-    // new HtmlWebpackExternalsPlugin(
-    //   {
-    //     externals: [
-    //       {
-    //         module: 'react',
-    //         entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
-    //         global: 'React'
-    //       },
-    //       {
-    //         module: 'react-dom',
-    //         entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
-    //         global: 'ReactDOM'
-    //       }
-    //     ]
-    //   }
-    // ),
+    new HtmlWebpackExternalsPlugin(
+      {
+        externals: [
+          {
+            module: 'react',
+            entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
+            global: 'React'
+          },
+          {
+            module: 'react-dom',
+            entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
+            global: 'ReactDOM'
+          },
+          {
+            module: 'bootstrap',
+            entry: 'dist/css/bootstrap.min.css'
+          }
+        ]
+      }
+    ),
     new CleanWebpackPlugin()
   ].concat(htmlWebpackPlugins),
-  optimization: {
-    splitChunks: {
-      minSize: 0,
-      cacheGroups: {
-        commons: {
-          test: /(react|react-dom)/,
-          name: 'vendors',
-          chunks: 'all'
-        }
-      }
-    }
-  },
+  // optimization: {
+  //   splitChunks: {
+  //     minSize: 0,
+  //     cacheGroups: {
+  //       commons: {
+  //         name: 'common',
+  //         chunks: 'all',
+  //         minChunks: 2
+  //       },
+  //       vendors: {
+  //         name: 'vendors',
+  //         test: /[\\/]node_modules[\\/]/,
+  //         chunks: 'all',
+  //         priority: 100
+  //       }
+  //     }
+  //   }
+  // },
   devtool: 'source-map'
 };
