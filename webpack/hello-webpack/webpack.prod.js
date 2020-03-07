@@ -49,7 +49,7 @@ const setMPA = () => {
 const { entry, htmlWebpackPlugins } = setMPA();
 
 module.exports = {
-  mode: 'none',
+  mode: 'production',
   entry,
   output: {
     path: path.join(__dirname, 'dist'),
@@ -131,22 +131,22 @@ module.exports = {
       assetNameRegExp: /\.css$/g,
       cssProcessor: require('cssnano')
     }),
-    new HtmlWebpackExternalsPlugin(
-      {
-        externals: [
-          {
-            module: 'react',
-            entry: 'https://unpkg.com/react@16/umd/react.development.js',
-            global: 'React'
-          },
-          {
-            module: 'react-dom',
-            entry: 'https://unpkg.com/react-dom@16/umd/react-dom.development.js',
-            global: 'ReactDOM'
-          }
-        ]
-      }
-    ),
+    // new HtmlWebpackExternalsPlugin(
+    //   {
+    //     externals: [
+    //       {
+    //         module: 'react',
+    //         entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
+    //         global: 'React'
+    //       },
+    //       {
+    //         module: 'react-dom',
+    //         entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
+    //         global: 'ReactDOM'
+    //       }
+    //     ]
+    //   }
+    // ),
     new CleanWebpackPlugin()
   ].concat(htmlWebpackPlugins),
   optimization: {
@@ -154,9 +154,9 @@ module.exports = {
       minSize: 0,
       cacheGroups: {
         commons: {
-          name: 'commons',
-          chunks: 'all',
-          minChunks: 2
+          test: /(react|react-dom)/,
+          name: 'vendors',
+          chunks: 'all'
         }
       }
     }

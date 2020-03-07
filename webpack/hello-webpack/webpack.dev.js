@@ -48,12 +48,12 @@ const setMPA = () => {
 const { entry, htmlWebpackPlugins } = setMPA();
 
 module.exports = {
+  mode: 'development',
   entry,
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js'
   },
-  mode: 'development',
   module: {
     rules: [
       {
