@@ -8,10 +8,16 @@ class Promise {
     this.value = undefined
     this.reason = undefined
 
+    // 成功存放的数组
+    this.onResolvedCallbacks = [];
+    // 失败存放法数组
+    this.onRejectedCallbacks = [];
+
     const resolve = value => {
       if (this.status === PENDING) {
         this.value = value
         this.status = RESOLVED
+        this.onResolvedCallbacks.forEach(fn => fn())
       }
     }
 
@@ -19,6 +25,7 @@ class Promise {
       if (this.status === PENDING) {
         this.reason = reason
         this.status = REJECTED
+        this.onRejectedCallbacks.forEach(fn => fn())
       }
     }
 
@@ -35,6 +42,15 @@ class Promise {
     }
     if (this.status === REJECTED) {
       onrejected(this.reason)
+    }
+
+    if(this.status === PENDING){
+      this.onResolvedCallbacks.push(()=>{
+        onfulfilled(this.value)
+      })
+      this.onRejectedCallbacks.push(()=>{
+        onrejected(this.reason)
+      })
     }
   }
 }

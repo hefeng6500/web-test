@@ -3,12 +3,12 @@ const Promise = require('./Promise/index.js')
 let promise = new Promise((resolve, reject) => {
   
   // throw new Error('这是错误哦')
-  resolve('data')
+  // resolve('data')
   // reject('data')
 
-  // setTimeout(() => {
-  //   resolve('data')
-  // }, 1000);
+  setTimeout(() => {
+    reject('data')
+  }, 1000);
 
 })
 
