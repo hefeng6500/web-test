@@ -1,4 +1,5 @@
 import { observer } from './index'
+import { arrayMethods, observerArray } from './array'
 // 定义响应式数据变化
 export function defineReactive(data, key, value) {
 
@@ -12,8 +13,9 @@ export function defineReactive(data, key, value) {
       return value
     },
     set(newVal) {
-      console.log("设置数据");
       if (newVal === value) return
+      observer(newVal)
+      console.log("设置数据");
       value = newVal
     }
   })
@@ -21,7 +23,12 @@ export function defineReactive(data, key, value) {
 
 class Observer {
   constructor(data) {
-    this.walk(data)
+    if (Array.isArray(data)) {
+      data.__proto__ = arrayMethods
+      observerArray(data) // 深度观测数组里面的每一项
+    } else {
+      this.walk(data)
+    }
   }
 
   walk(data) {

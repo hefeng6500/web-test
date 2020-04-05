@@ -9,7 +9,7 @@ let vm = new Vue({
         name: 'hefeng',
         age: 18
       },
-      arr: [1, 2, 3]
+      arr: [{a: 0},1, 2, 3]
     }
   },
   computed: {
@@ -23,5 +23,10 @@ let vm = new Vue({
 // vm._data.msg = 'learning Vue'
 // console.log(vm._data.msg);
 
-vm.msg = 'learning Vue'
-console.log(vm.msg);
+// vm.msg = 'learning Vue'
+// console.log(vm.msg);
+
+// console.log(vm.arr.push({ a: 1 }), vm.arr[3].a);
+console.log(vm.arr[0].a = 100);
+
+
