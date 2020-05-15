@@ -21,10 +21,10 @@
     function inheritPrototype(SubClass, SuperClass) {
       // 创建父类原型的实例
       var p = inheritObject(SuperClass.prototype)
-      // 将子类原型的constructor指会自己
-      p.constructor = SubClass
       // 继承父类原型的实例
       SubClass.prototype = p
+      // 将子类原型的constructor指回自己
+      p.constructor = SubClass
     }
 
     function SuperClass(name) {
@@ -41,12 +41,17 @@
       this.time = time
     }
 
-    // inheritPrototype(SubClass, SuperClass)
+    inheritPrototype(SubClass, SuperClass)
 
+    /**
+     * API： Object.create()
+     * 方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__。
+     * 
+     * /
     // SubClass.prototype = Object.create(SuperClass.prototype)
 
-    SubClass.prototype = SuperClass.prototype
-    // SubClass.prototype.constructor = SuperClass
+    // 这么写会达到示例的预期效果，但是扩展子类原型方法时会污染父类原型
+    // SubClass.prototype = SuperClass.prototype
 
     SubClass.prototype.getTime = function () {
       console.log(this.time)
