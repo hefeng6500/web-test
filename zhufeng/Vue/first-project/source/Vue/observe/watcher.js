@@ -1,3 +1,4 @@
+import Dep, { pushTarget, popTarget } from './dep'
 
 let id = 0
 class Watcher {
@@ -22,7 +23,19 @@ class Watcher {
   }
 
   get(){
+    // this 指的是当前的 watcher 
+    // 渲染 watcher ， Dep.watcher = watcher
+    pushTarget(this)
+
+    // 创建 watcher 会默认执行
     this.getter()
+    popTarget()
+    Dep.target
+    debugger
+  }
+
+  update(){
+    this.get()
   }
 
 

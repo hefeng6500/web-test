@@ -1,14 +1,22 @@
 import { observer } from './index'
 import { arrayMethods, observerArray } from './array'
+import Dep from './dep'
+
+
 // 定义响应式数据变化
 export function defineReactive(data, key, value) {
 
   // 如果 value 还是一个对象，需要进行递归劫持
   observer(value)
 
+  // dep 可以收集依赖
+  let dep = new Dep()
   // Object.defineProperty 不支持 ie8 及以下浏览器
   Object.defineProperty(data, key, {
     get() {
+      if(Dep.target){
+        dep.addSub(Dep.target)
+      }
       console.log("获取数据");
       return value
     },
@@ -17,6 +25,7 @@ export function defineReactive(data, key, value) {
       observer(newVal)
       console.log("设置数据");
       value = newVal
+      dep.notify()
     }
   })
 }
