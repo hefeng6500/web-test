@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,42 +11,64 @@
       margin: 0;
       padding: 0;
     }
+
     html,
     body {
-      height: 100%;
+      width: 100%;
+      height: 200px;
+      text-align: center;
+      background: #eee;
     }
-    .container{
+
+    .header {
+      height: 48px;
+      background: lightblue;
+    }
+
+    .footer {
+      clear: both;
+      height: 60px;
+      background: lightgray;
+    }
+
+    .container {
       float: left;
       width: 100%;
-      height: 100%;
+      height: 200px;
     }
-    .center{
-      margin: 0 300px; 
+
+    .center {
+      margin: 0 300px;
       height: 100%;
-      background: green;
+      background: lightgreen;
     }
-    .left{
+
+    .left {
       float: left;
       margin-left: -100%;
-      
       width: 300px;
       height: 100%;
-      background: red;
+      background: yellow;
     }
-    .right{
+
+    .right {
       float: left;
       margin-left: -300px;
       width: 300px;
       height: 100%;
-      background: blue;
+      background: pink;
     }
   </style>
 </head>
+
 <body>
+  <div class="header">this is header</div>
   <div class="container">
-    <div class="center"></div>
+    <div class="center">center</div>
   </div>
-  <div class="left"></div>
-  <div class="right"></div>  
+  <div class="left">left</div>
+  <div class="right">right</div>
+  <div class="footer">this is footer</div>
 </body>
+
 </html>
